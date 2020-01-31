@@ -1,0 +1,73 @@
+// "Helper" class that provides utility methods
+// to allow client to talk to server
+
+import config from './config';
+
+export default class Data {
+
+
+  // used to make the GET and POST requests to the REST API.
+  api(path, 
+      method = 'GET', 
+      body = null, 
+      requiresAuth = false, 
+      credentials = null) {
+        
+        const url = config.apiBaseUrl + path; // defined in config.js
+  
+        const options = {
+          method,
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+          },
+    };
+
+    if (body !== null) {
+      options.body = JSON.stringify(body);
+    }
+
+    if (requiresAuth) {
+      // creates a base-64 encoded ASCII string form the string of data 
+      const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+
+      // the Authorization request header should hold the credentials to authenticate the client with the server
+      options.headers['Authorization'] = `Basic ${encodedCredentials}`;
+
+    }
+
+    return fetch(url, options);
+  }
+
+// helper methods for creating and getting users
+
+
+
+  // The only server request that requires authentication is the GET request made to /users
+  async getUser(username, password) {
+    const response = await this.api(`/users`, 'GET', null, true, { username, password });
+    if (response.status === 200) {
+      return response.json().then(data => data);
+    }
+    else if (response.status === 401) {
+      return null;
+    }
+    else {
+      throw new Error();
+    }
+  }
+  
+  async createUser(user) {
+    const response = await this.api('/users', 'POST', user);
+    if (response.status === 201) {
+      return [];
+    }
+    else if (response.status === 400) {
+      return response.json().then(data => {
+        return data.errors;
+      });
+    }
+    else {
+      throw new Error();
+    }
+  }
+}
