@@ -1,3 +1,5 @@
+// File to utilize and manipulate the data from Date.js
+
 import React, { Component } from 'react';
 import Data from './Data';
 import Cookies from 'js-cookie';
@@ -51,7 +53,7 @@ export class Provider extends Component {
         });
         // first argument passed to Cookies.set() specifies the name of the cookie to set
         // second value specifies the value you want to store in the cookie
-        // pass the last argumetn to set additional cookie options, for example an expiration
+        // pass the last argument to set additional cookie options, for example an expiration
         Cookies.set('authenticatedUser', JSON.stringify(user), { expires: 1 } ); // cookie expires in 1 day
       }
       return user;

@@ -1,7 +1,10 @@
+// File used to Display an individual Course-Detail when clicked on from the index.js file
 
 import React, { Component } from 'react';
+import Markdown from 'react-markdown';
 
 export default class Course extends Component {
+
 
   render() {
 

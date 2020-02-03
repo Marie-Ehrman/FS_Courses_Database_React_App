@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
-export default class UserSignUp extends Component {
+export default class SignUp extends Component {
 
   state = {
     firstName: '',
@@ -42,7 +42,7 @@ export default class UserSignUp extends Component {
                   className=""
                   onChange={this.change} 
                   placeholder="First Name"
-                  value=""
+                  value={firstName}
                 />
                 <input 
                   id="lastName" 
@@ -51,7 +51,7 @@ export default class UserSignUp extends Component {
                   className=""
                   onChange={this.change} 
                   placeholder="Last Name"
-                  value=""
+                  value={lastName}
                 />
                 <input 
                   id="emailAddress" 
@@ -60,7 +60,7 @@ export default class UserSignUp extends Component {
                   className=""
                   onChange={this.change} 
                   placeholder="Email Address"
-                  value=""
+                  value={emailAddress}
                 />
                 <input 
                   id="password" 
@@ -69,7 +69,7 @@ export default class UserSignUp extends Component {
                   className=""
                   onChange={this.change} 
                   placeholder="Password"
-                  value=""
+                  value={password}
                 />
                 <input 
                   id="confirmPassword" 
@@ -78,7 +78,7 @@ export default class UserSignUp extends Component {
                   className=""
                   onChange={this.change} 
                   placeholder="Confirm Password"
-                  value=""
+                  value={confirmPassword}
                 />
               </React.Fragment>
             )} />
@@ -104,6 +104,7 @@ export default class UserSignUp extends Component {
 
   submit = () => {
 
+    // destructrued context variable allows access to methods from Data.js
       const { context } = this.props;
 
       const {
@@ -127,6 +128,7 @@ export default class UserSignUp extends Component {
       context.data.createUser(user)
       // if the promise is an array of errors, set the errors state of this class to the array
         .then( errors => {
+            console.log(errors);
             if(errors.length){
                 this.setState( { errors } );
             } else {

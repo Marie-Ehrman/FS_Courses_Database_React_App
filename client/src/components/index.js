@@ -1,31 +1,68 @@
+// Displays the index route with a list of all courses
+
 import React, { Component } from 'react';
+import Error from './Error'
+
 
 export default class Courses extends Component {
 
+  state = {
+    courses: []
+  }
+
+componentDidMount(){
+  const { context } = this.props;
+
+  context.data.getCourses()
+         .then(courses => {this.setState({ courses })});
+
+}
+
   render() {
+    const { courses } = this.state;
+
+    console.log(this.state);
+
+    //   const {
+  //   id,
+  //   title,
+  //   description,
+  //   estimatedTime,
+  //   materialsNeeded,
+  //   userId
+  //  } = this.state;
+
+  //  const course = {
+  //   id,
+  //   title,
+  //   description,
+  //   estimatedTime,
+  //   materialsNeeded,
+  //   userId
+  //  }
+
+
+
+
 
     return (
 
+      // create element to hold course cards, this dynamically create a card for each course
+      // in the database
       <div className="bounds">
-        <div className="grid-33">
-            {/* Link to Create Course */}
-            <a className="course--module course--link" href="course-detail.html">
+
+      {this.state.courses.map(course => {
+          return(
+          <div className="grid-33" key={`${course.id}`}>
+            <a className="course--module course--link" href={`/courses/${course.id}`}>
             <h4 className="course--label">Course</h4>
-            <h3 className="course--title">Build a Basic Bookcase</h3>
+            <h3 className="course--title">{`${course.title}`}</h3>
             </a>
-        </div>
-        <div className="grid-33">
-            <a className="course--module course--link" href="course-detail.html">
-            <h4 className="course--label">Course</h4>
-            <h3 className="course--title">Learn How to Program</h3>
-            </a>
-        </div>
-        <div className="grid-33">
-            <a className="course--module course--link" href="course-detail.html">
-            <h4 className="course--label">Course</h4>
-            <h3 className="course--title">Learn How to Test Programs</h3>
-            </a>
-        </div>
+          </div>
+        )
+
+      })}
+
         <div className="grid-33">
         {/* Link to Create Course */}
             <a className="course--module course--add--module" href="create-course.html">

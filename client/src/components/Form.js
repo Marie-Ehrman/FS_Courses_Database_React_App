@@ -1,3 +1,5 @@
+// Form component usable in other components requiring a form
+
 import React from 'react';
 
 export default (props) => {
@@ -23,6 +25,7 @@ export default (props) => {
     <div>
       <ErrorsDisplay errors={errors} />
       <form onSubmit={handleSubmit}>
+      {/* elements() function creates elements with the React.Fragment component in other componenets */}
         {elements()}
         <div className="grid-100 pad-bottom">
           <button className="button" type="submit">{submitButtonText}</button>
@@ -33,6 +36,7 @@ export default (props) => {
   );
 }
 
+// handles validation errors to be displayed on screen
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
 
