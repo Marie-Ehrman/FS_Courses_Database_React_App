@@ -128,7 +128,6 @@ export default class SignUp extends Component {
       context.data.createUser(user)
       // if the promise is an array of errors, set the errors state of this class to the array
         .then( errors => {
-            console.log(errors);
             if(errors.length){
                 this.setState( { errors } );
             } else {
@@ -137,7 +136,6 @@ export default class SignUp extends Component {
         })
         // handle rejected promises
         .catch(err => {
-            console.log(err);
             this.props.history.push('/error'); // push to history stack
 
         });

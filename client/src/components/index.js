@@ -21,30 +21,6 @@ componentDidMount(){
   render() {
     const { courses } = this.state;
 
-    console.log(this.state);
-
-    //   const {
-  //   id,
-  //   title,
-  //   description,
-  //   estimatedTime,
-  //   materialsNeeded,
-  //   userId
-  //  } = this.state;
-
-  //  const course = {
-  //   id,
-  //   title,
-  //   description,
-  //   estimatedTime,
-  //   materialsNeeded,
-  //   userId
-  //  }
-
-
-
-
-
     return (
 
       // create element to hold course cards, this dynamically create a card for each course

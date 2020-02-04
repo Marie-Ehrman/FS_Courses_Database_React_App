@@ -94,23 +94,16 @@ router.get('/users', authenticateUser, asyncHandler(async (req,res)=> {
 // POST /api/users 201 - Creates a user, sets the Location header to "/", and returns no content
 router.post('/users', asyncHandler(async (req,res)=> {
 
-    const errors = validationResult(req); // if email not valid log errors
-    if (!errors.isEmpty()) {
-        const errorMessages = errors.array().map(error => error.msg); //map error messages
-        res.status(400).json({ errors: errorMessages }); // set error status and send message
-    
-    } else { // else post new user
-        const user = req.body; // set user to the request body
+    const user = req.body; // set user to the request body
 
-        if(user.password){
-            user.password = bcryptjs.hashSync(user.password); //  hash password with bcrypjs
-        }
-    
-        await User.create(req.body); // create new user
-    
-        res.status(201).location('/').end(); // respond with 201 no content and set location to  '/'
-    
+    if(user.password){
+        user.password = bcryptjs.hashSync(user.password); //  hash password with bcrypjs
     }
+
+    await User.create(req.body); // create new user
+
+    res.status(201).location('/').end(); // respond with 201 no content and set location to  '/'
+   
    
 }));
 

@@ -36,6 +36,9 @@ module.exports = (sequelize, DataTypes) => {
     emailAddress: {
       type: DataTypes.STRING,
       allowNull: false, // disallow null
+      unique: {
+            msg: "User account already exists. Click Sign In link below."
+      },
         //set validators to disallow empty field
         validate: {
             notNull: {
@@ -44,7 +47,9 @@ module.exports = (sequelize, DataTypes) => {
             notEmpty: { // prevent the email value from being set to an empty string
                 msg: '"Email" is required'         
             },
-            isEmail: true,
+            isEmail: {
+                msg: 'Valid email required'
+            },
         }
     },
     password: {
