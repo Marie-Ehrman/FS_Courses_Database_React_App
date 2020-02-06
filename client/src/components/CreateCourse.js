@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
-export default class UserSignUp extends Component {
+export default class CreateCourse extends Component {
   state = {
     name: '',
     username: '',
@@ -85,9 +85,7 @@ export default class UserSignUp extends Component {
                 </div>
               </React.Fragment>
             )} />
-          <p> Already have an account? 
-              <Link to="/signin">Click here</Link> to sign in!
-          </p>
+
         </div>
       </div>
     );

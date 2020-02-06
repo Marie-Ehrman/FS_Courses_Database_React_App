@@ -22,7 +22,7 @@ export class Provider extends Component {
 
     const { authenticatedUser } = this.state; //extract authenticatedUser from state
     
-    // create a value object to provide the utility methods of the class to Data
+    // value object to provide the utility methods containing context to be shared
     const value = { 
       authenticatedUser,
       data: this.data,
@@ -43,8 +43,8 @@ export class Provider extends Component {
   }
 
   
-  signIn = async (username, password) => {
-      const user = await this.data.getUser(username, password); // the returned promise would be an object
+  signIn = async (emailAddress, password) => {
+      const user = await this.data.getUser(emailAddress, password); // the returned promise would be an object
       if(user !== null){
         this.setState(() => {
           return {

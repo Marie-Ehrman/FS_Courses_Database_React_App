@@ -27,10 +27,10 @@ export default class Data {
     }
 
     if (requiresAuth) {
-      // creates a base-64 encoded ASCII string form the string of data 
-      const encodedCredentials = btoa(`${credentials.username}:${credentials.password}`);
+      // create a base-64 encoded ASCII string form the string of data 
+      const encodedCredentials = btoa(`${credentials.emailAddress}:${credentials.password}`);
 
-      // the Authorization request header should hold the credentials to authenticate the client with the server
+      // holds the credentials to authenticate the client with the server
       options.headers['Authorization'] = `Basic ${encodedCredentials}`;
 
     }
@@ -44,8 +44,8 @@ export default class Data {
   // The only server request that requires authentication is the GET request made to /users
     
   // helper methods for creating and getting users
-    async getUser(username, password) {
-    const response = await this.api(`/users`, 'GET', null, true, { username, password });
+    async getUser(emailAddress, password) {
+    const response = await this.api(`/users`, 'GET', null, true, { emailAddress, password });
     if (response.status === 200) {
       return response.json().then(data => data);
     }
@@ -88,8 +88,8 @@ export default class Data {
         }
     }
 
-    async getSingleCourse() {
-        const response = await this.api(`/courses/:id`);
+    async getCourseDetail(id) {
+        const response = await this.api(`/courses/${id}`);
         if (response.status === 200) {
             return response.json().then(data => data);
         }
@@ -102,7 +102,7 @@ export default class Data {
     }
 
     async createCourse(course) {
-      const response = await this.api('/users', 'POST', course);
+      const response = await this.api('/courses', 'POST', course);
       if (response.status === 201) {
         return [];
       }

@@ -1,7 +1,6 @@
 // Displays the index route with a list of all courses
 
 import React, { Component } from 'react';
-import Error from './Error'
 
 
 export default class Courses extends Component {
@@ -27,7 +26,7 @@ componentDidMount(){
       // in the database
       <div className="bounds">
 
-      {this.state.courses.map(course => {
+      {courses.map(course => {
           return(
           <div className="grid-33" key={`${course.id}`}>
             <a className="course--module course--link" href={`/courses/${course.id}`}>
@@ -41,7 +40,7 @@ componentDidMount(){
 
         <div className="grid-33">
         {/* Link to Create Course */}
-            <a className="course--module course--add--module" href="create-course.html">
+            <a className="course--module course--add--module" href="/courses/create">
             <h3 className="course--add--title">
                 <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px"
                 viewBox="0 0 13 13" className="add">

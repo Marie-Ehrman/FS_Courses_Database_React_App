@@ -39,8 +39,7 @@ export default (props) => {
 // handles validation errors to be displayed on screen
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
-
-  console.log(errors);
+console.log(errors);
   if (errors.length) {
     errorsDisplay = (
       <div>
@@ -53,5 +52,6 @@ function ErrorsDisplay({ errors }) {
       </div>
     );
   }
+  console.log(errorsDisplay);
   return errorsDisplay;
 }

@@ -36,7 +36,7 @@ export default class SignIn extends Component {
                   type="text"
                   className=""
                   onChange={this.change} 
-                  placeholder="User Name"
+                  placeholder="Email"
                   value={emailAddress}
                 />
                 <input 
@@ -70,6 +70,31 @@ export default class SignIn extends Component {
   }
 
   submit = () => {
+    //access context via props
+    const { context } = this.props;
+    // destructure state variables
+    const { emailAddress, password } = this.state;
+
+    // access signIn function via props context
+    context.actions.signIn(emailAddress, password)
+        .then( user => {
+          // if user is null set errors state to an array holding an error message
+            if(user === null){
+                  this.setState(() => {
+                      return { errors: [ {message:'Sign-in was unsuccessful. Please enter credentials'} ] }
+                  });
+                  console.log(this.state.errors);
+            } else { // else navigate authenticated user to home screen
+              this.props.history.push('/');
+              console.log(`SUCCESS, ${emailAddress} is now signed in`);
+           }
+        })
+        .catch(err => { // handle a rejected Promise
+            console.log(err);
+            this.props.history.push('/error'); // navigate user to error route in case of error
+        })
+
+
 
   }
 
