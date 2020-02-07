@@ -2,11 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
+
+// create as a PrivateRoute
 export default class CreateCourse extends Component {
   state = {
-    name: '',
-    username: '',
-    password: '',
+    title: '',
+    description: '',
+    estimatedTime: '',
+    materialsNeeded: '',
     errors: [],
   }
 
@@ -107,6 +110,6 @@ export default class CreateCourse extends Component {
   }
 
   cancel = () => {
-
+      this.props.history.push('/');
   }
 }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
-export default class SignUp extends Component {
+export default class UserSignUp extends Component {
 
   state = {
     firstName: '',
@@ -125,20 +125,25 @@ export default class SignUp extends Component {
       };
 
       // access the createUser function via context, this is an async function that returns a Promise
-      context.data.createUser(user)
-      // if the promise is an array of errors, set the errors state of this class to the array
-        .then( errors => {
-            if(errors.length){
-                this.setState( { errors } );
-            } else {
-                console.log(`${firstName} ${lastName} is successfully signed up. ${emailAddress} authenticated!`);
-              }
-        })
-        // handle rejected promises
-        .catch(err => {
-            this.props.history.push('/error'); // push to history stack
+      
+      
+          context.data.createUser(user)
+          // if the promise is an array of errors, set the errors state of this class to the array
+            .then( errors => {
+                if(errors.length){
+                    this.setState( { errors } );
+                } else {
+                    context.actions.signIn(emailAddress, password)
+                        .then(() => {
+                            this.props.history.push('/');
+                        });
+                  }
+            })
+            // handle rejected promises
+            .catch(err => {
+                this.props.history.push('/error'); // push to history stack
 
-        });
+            });
 
   }
 

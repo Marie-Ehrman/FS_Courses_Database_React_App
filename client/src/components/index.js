@@ -13,7 +13,10 @@ componentDidMount(){
   const { context } = this.props;
 
   context.data.getCourses()
-         .then(courses => {this.setState({ courses })});
+         .then(courses => {this.setState({ courses })})
+         .catch(err => {
+          this.props.history.push('/error'); // push to history stack
+        });
 
 }
 

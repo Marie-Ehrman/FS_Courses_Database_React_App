@@ -12,23 +12,34 @@ import Courses from './components';
 import CourseDetail from './components/CourseDetail';
 import CreateCourse from './components/CreateCourse';
 import UpdateCourse from './components/UpdateCourse';
-import SignUp from './components/SignUp';
-import SignIn from './components/SignIn';
+import UserSignUp from './components/UserSignUp';
+import UserSignIn from './components/UserSignIn';
+import UserSignOut from './components/UserSignOut';
+
+
 import NotFound from './components/NotFound';
 
 import withContext from './Context';
+import PrivateRoute from './PrivateRoute';
+
 
 // give Components Context subscribing access to data and actions
 const HeaderWithContext = withContext(Header);
-const SignUpWithContext = withContext(SignUp);
-const SignInWithContext = withContext(SignIn);
+
+// courses
 const CoursesWithContext = withContext(Courses);
 const CourseDetailWithContext = withContext(CourseDetail);
 const CreateCourseWithContext = withContext(CreateCourse);
 const UpdateCourseWithContext = withContext(UpdateCourse);
 
+// login
+const SignUpWithContext = withContext(UserSignUp);
+const SignInWithContext = withContext(UserSignIn);
+const SignOutWithContext = withContext(UserSignOut);
 
 
+
+// Set up routes
 export default () => (
   <BrowserRouter>
     <div>
@@ -36,13 +47,12 @@ export default () => (
 
       <Switch>
         <Route exact path="/" component={CoursesWithContext} />
+        <PrivateRoute path="/courses/create" component={CreateCourseWithContext} />
+        <PrivateRoute path="/courses/:id/update" component={UpdateCourseWithContext} />
         <Route path="/courses/:id" component={CourseDetailWithContext} />
-        <Route path="/courses/:id/update" component={UpdateCourseWithContext} />
-        <Route path="/courses/create" component={CreateCourseWithContext} />
-
         <Route path="/signin" component={SignInWithContext} />
         <Route path="/signup" component={SignUpWithContext} />
-        {/* <Route path="/signout" component={SignOut} /> */}
+        <Route path="/signout" component={SignOutWithContext} />
         <Route component={NotFound} />
       </Switch>
     </div>

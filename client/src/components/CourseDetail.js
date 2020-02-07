@@ -7,7 +7,9 @@ export default class CourseDetail extends Component {
 
 
   state = {
-    course: [],
+    course: {
+        User:{}
+    },
     id: this.props.match.params.id
   }
 
@@ -19,18 +21,25 @@ componentDidMount(){
          .catch(err => {
           this.props.history.push('/error'); // push to history stack
         });
-
 }
+
+
   render() {
 
+    const { context } = this.props;
     const { course } = this.state;
+
     const instructor = this.state.course.User;
+    const authUser = context.authenticatedUser;
+
+    console.log(authUser.id);
+    console.log(instructor.id);
+    
 
     // convert these texts into strings to pass to React Markdown
     const description = `${course.description}`;
     const materials = `${course.materialsNeeded}`;
 
-    console.log(instructor);
     return (
       <div className="bounds">
         <div className="grid-100">
@@ -38,13 +47,20 @@ componentDidMount(){
           <div>
       <div className="actions--bar">
         <div className="bounds">
-          <div className="grid-100">
-            <span>
-            <a className="button" href={`/courses/${'id'}/update`}>Update Course</a>
-            <a className="button" href="#">Delete Course</a>
-            </span>
-            <a className="button button-secondary" href="/">Return to List</a>
-          </div>
+          { authUser.id === instructor.id ?
+                <div className="grid-100">
+                <span>
+                <a className="button" href={`/courses/${course.id}/update`}>Update Course</a>
+                <a className="button" onClick={this.delete} href="/">Delete Course</a>
+                </span>
+                <a className="button button-secondary" href="/">Return to List</a>
+                </div>
+            :
+                <div className="grid-100">
+                <a className="button button-secondary" href="/">Return to List</a>
+                </div>
+          }
+          
         </div>
       </div>
       <div className="bounds course--detail">
@@ -52,7 +68,7 @@ componentDidMount(){
           <div className="course--header">
             <h4 className="course--label">Course</h4>
             <h3 className="course--title">{`${course.title}`}</h3>
-            {/* <p>By {`${course.User.firstName} ${course.User.lastName}`}</p> */}
+            <p>By {`${instructor.firstName} ${instructor.lastName}`}</p>
           </div>
           <div className="course--description">
 
@@ -83,5 +99,36 @@ componentDidMount(){
         </div>
       </div>
     );
+  }
+
+  delete = () => {
+
+        const { context } = this.props;
+        const {
+          course,
+          id,
+        } = this.state;
+
+        const user = this.state.course.User;
+        const pass = context.authenticatedUser.password;
+
+
+        context.data.deleteCourse(user.emailAddress, pass, id)
+        .then( errors => {
+          if(errors.length){
+              this.setState( { errors } );
+          } else {
+              console.log(`${course.title} is successfully deleted.`);
+              this.props.history.push('/'); // push index route to history
+
+            }
+        })
+      // handle rejected promises
+      .catch(err => {
+        console.log(err);
+          this.props.history.push('/error'); // push to history stack
+
+      });
+
   }
 }

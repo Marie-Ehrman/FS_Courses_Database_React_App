@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Form from './Form';
 
-export default class SignIn extends Component {
+export default class UserSignIn extends Component {
   state = {
 
     emailAddress: '',
@@ -72,6 +72,13 @@ export default class SignIn extends Component {
   submit = () => {
     //access context via props
     const { context } = this.props;
+    
+    // 
+    const { from } = this.props.location.state 
+       || { from: { pathname: '/courses/create' } }
+       || { from: { pathname: '/courses/:id/update' } };
+
+
     // destructure state variables
     const { emailAddress, password } = this.state;
 
@@ -85,7 +92,7 @@ export default class SignIn extends Component {
                   });
                   console.log(this.state.errors);
             } else { // else navigate authenticated user to home screen
-              this.props.history.push('/');
+              this.props.history.push(from);
               console.log(`SUCCESS, ${emailAddress} is now signed in`);
            }
         })

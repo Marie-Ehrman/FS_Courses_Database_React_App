@@ -116,5 +116,20 @@ export default class Data {
         throw new Error();
       }
     }
+
+    // course delete route, require authentication since this is not a route to make Private
+    async deleteCourse(emailAddress, password, id) {
+      const response = await this.api(`/courses/${id}`, 'DELETE', null, true, { emailAddress, password });
+      if (response.status === 204) {
+        console.log('course deleted!');
+        return [];
+      }
+      else if (response.status === 401) {
+          return null;
+      }
+      else {
+          throw new Error();
+      }
+  }
   
 }
