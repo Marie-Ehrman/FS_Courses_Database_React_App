@@ -113,6 +113,7 @@ export default class UserSignUp extends Component {
         emailAddress,
         password,
         confirmPassword,
+        errors
       } = this.state;
 
       //create a new user object
@@ -122,10 +123,10 @@ export default class UserSignUp extends Component {
         emailAddress,
         password,
         confirmPassword,
+        errors
       };
 
       // access the createUser function via context, this is an async function that returns a Promise
-      
       
           context.data.createUser(user)
           // if the promise is an array of errors, set the errors state of this class to the array

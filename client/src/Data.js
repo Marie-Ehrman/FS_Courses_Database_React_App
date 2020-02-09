@@ -74,6 +74,7 @@ export default class Data {
 
   // helper methods for creating and getting courses
 
+  // get list of all course
     async getCourses() {
         const response = await this.api(`/courses`);
         if (response.status === 200) {
@@ -88,6 +89,7 @@ export default class Data {
         }
     }
 
+    // get a single course
     async getCourseDetail(id) {
         const response = await this.api(`/courses/${id}`);
         if (response.status === 200) {
@@ -101,20 +103,37 @@ export default class Data {
         }
     }
 
-    async createCourse(course) {
-      const response = await this.api('/courses', 'POST', course);
+    // 
+    async createCourse(course, emailAddress, password) {
+      const response = await this.api('/courses', 'POST', course, true, { emailAddress, password });
       if (response.status === 201) {
         return [];
       }
       else if (response.status === 400) {
         return response.json().then(data => {
-            console.log(data);
-          return data.error;
+          return data.error.err.errors;
         });
       }
       else {
         throw new Error();
       }
+    }
+
+    async updateCourse(course, emailAddress, password) {
+      console.log(`attempting fetch with ${course.title}`);
+      const response = await this.api(`/courses/${course.id}`, 'PUT', course, true, { emailAddress, password });
+      if (response.status === 204) {
+        console.log('course updated!');
+        return [];
+      }
+      else if (response.status === 401) {
+          return null;
+      } else if (response.status === 400) {
+        return response.json().then(data => {console.log(data)});}
+      else {
+          throw new Error();
+      }
+
     }
 
     // course delete route, require authentication since this is not a route to make Private

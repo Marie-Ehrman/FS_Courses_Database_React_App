@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
                 msg: 'Please provide a value for "Title"',
             },
             notEmpty: { // prevent the title value from being set to an empty string
-                msg: '"First Name" is required'         
+                msg: '"Title" is required'         
             }      
         }
     },

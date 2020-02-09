@@ -27,6 +27,7 @@ export default (props) => {
       <form onSubmit={handleSubmit}>
       {/* elements() function creates elements with the React.Fragment component in other componenets */}
         {elements()}
+        {/* dynamically render buttons from parent component */}
         <div className="grid-100 pad-bottom">
           <button className="button" type="submit">{submitButtonText}</button>
           <button className="button button-secondary" onClick={handleCancel}>Cancel</button>
@@ -42,6 +43,7 @@ function ErrorsDisplay({ errors }) {
 console.log(errors);
   if (errors.length) {
     errorsDisplay = (
+      //render error messages 
       <div>
         <h2 className="validation--errors--label">Validation errors</h2>
         <div className="validation-errors">
