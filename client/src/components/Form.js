@@ -1,8 +1,11 @@
-// Form component usable in other components requiring a form
-
 import React from 'react';
 
+
+// Form component usable in other components requiring a form
+// Modeled from React Authentication Courses
 export default (props) => {
+
+  // destructure props 
   const {
     cancel,
     errors,
@@ -20,12 +23,11 @@ export default (props) => {
     event.preventDefault();
     cancel();
   }
-console.log(errors);
   return (
     <div>
       <ErrorsDisplay errors={errors} />
       <form onSubmit={handleSubmit}>
-      {/* elements() function creates elements with the React.Fragment component in other componenets */}
+      {/* creates elements with the React.Fragment component in parent componenets */}
         {elements()}
         {/* dynamically render buttons from parent component */}
         <div className="grid-100 pad-bottom">

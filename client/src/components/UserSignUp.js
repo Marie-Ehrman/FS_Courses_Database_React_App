@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import Form from './Form';
 
+// Modeled from React Authentication Courses and Sample Markup: sign-up.html
 export default class UserSignUp extends Component {
 
   state = {
@@ -23,12 +24,7 @@ export default class UserSignUp extends Component {
       errors,
     } = this.state;
 
-    console.log(password);
-    console.log(confirmPassword);
-        console.log(errors);
-
     return (
-    // Modeled from React Authentication Courses and Sample Markup: sign-up.html
       <div className="bounds">
         <div className="grid-33 centered signin">
           <h1>Sign Up</h1>
@@ -140,7 +136,6 @@ export default class UserSignUp extends Component {
           // if the promise is an array of errors, set the errors state of this class to the array
             .then( errors => {
                 if(errors.length){
-                  console.log(errors);
                     this.setState( { errors } );
                 } else {
                     context.actions.signIn(emailAddress, password)

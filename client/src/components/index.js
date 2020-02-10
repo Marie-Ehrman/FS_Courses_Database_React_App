@@ -27,20 +27,19 @@ export default class Courses extends Component {
 
     return (
 
-      // create element to hold course cards, this dynamically create a card for each course
-      // in the database
+      // create element to hold course cards
       <div className="bounds">
 
+      {/* this dynamically creates a card for each course in the database */}
       {courses.map(course => {
-
           return(
-          <div className="grid-33" key={`${course.id}`}>
-            <NavLink to={`/courses/${course.id}`} className="course--module course--link">
-              <h4 className="course--label">Course</h4>
-              <h3 className="course--title">{`${course.title}`}</h3>
-            </NavLink>
-          </div>
-        )
+              <div className="grid-33" key={`${course.id}`}>
+                <NavLink to={`/courses/${course.id}`} className="course--module course--link">
+                  <h4 className="course--label">Course</h4>
+                  <h3 className="course--title">{`${course.title}`}</h3>
+                </NavLink>
+              </div>
+          )
 
       })}
 

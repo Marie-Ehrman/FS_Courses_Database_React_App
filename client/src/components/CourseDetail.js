@@ -1,10 +1,10 @@
-// File used to Display an individual Course-Detail when clicked on from the index.js file
 
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 
 import ReactMarkdown from 'react-markdown';
 
+// File used to Display an individual Course-Detail when clicked on from the index.js file
 // Modeled from React Authentication Courses and Sample Markup: course-detail.html
 export default class CourseDetail extends Component {
 
@@ -16,6 +16,7 @@ export default class CourseDetail extends Component {
     id: this.props.match.params.id
   }
 
+  // initially make the api call using the url params id
   componentDidMount(){
     const { context } = this.props;
 
@@ -47,9 +48,10 @@ export default class CourseDetail extends Component {
         <div className="grid-100">
           <h1>Courses</h1>
           <div>
-            {/* conditionally render "Update" and "Delete" buttons */}
             <div className="actions--bar">
               <div className="bounds">
+
+                {/* conditionally render "Update" and "Delete" buttons */}
                 { authUser === null || authUser.id !== instructor.id
                   ?
                   <div className="grid-100">
@@ -64,6 +66,7 @@ export default class CourseDetail extends Component {
                     <NavLink to="/"className="button button-secondary">Return to List</NavLink>
                   </div>
                 }
+
               </div>
             </div>
     
@@ -95,15 +98,15 @@ export default class CourseDetail extends Component {
                       <h4>Materials Needed</h4>
                       <ul>
                         <ReactMarkdown source={materials}/>
-                      </ul>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+                      </ul> {/*y */}
+                    </li> {/*yi */}
+                  </ul> 
+                </div> {/*yik */}
+              </div> {/*yike */}
+            </div> 
+          </div> {/*yikes */}
+        </div> {/*yikes! */}
+      </div> 
     );
   }
 
