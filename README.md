@@ -29,6 +29,7 @@
 - Launch from terminal: `> npm start`
 - Server will be up and running on `localhost:5000`
 
+
  ## Technology
 
 
@@ -48,6 +49,17 @@ Project files initialized with Express Generator CLI and Sequelize CLI
 - Sequelize
 - SQLite3
 - pug
+
+## Testing
+#### Sample User 1
+- joe@smith.com
+- joepassword
+
+#### Sample User 2
+- sally@jones.com
+- sallypassword
+
+
 
 ## Sources
  I was able to achieve most of this project by following along with the Treehouse "React Authentication Courses".
