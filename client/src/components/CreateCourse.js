@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { NavLink } from 'react-router-dom';
 import Form from './Form';
 
 
 // create as a PrivateRoute
+// Modeled from React Authentication Courses and Sample Markup: course-create.html
+
 export default class CreateCourse extends Component {
 
   state = {
@@ -18,6 +19,8 @@ export default class CreateCourse extends Component {
   render() {
 
     const { context } = this.props;
+
+    //variable to store instructor as the authenticated user creating it
     const instructor = `${context.authenticatedUser.firstName} ${context.authenticatedUser.lastName}`;
 
     const {
@@ -31,10 +34,10 @@ export default class CreateCourse extends Component {
 
     return (
     
-      // Modeled from React Authentication Courses and Sample Markup: course-create.html
       <div className="bounds course--detail">
       <h1>Create Course</h1>
         <div>
+          {/* dynamic form from Form helper component */}
           <Form 
               cancel={this.cancel}
               errors={errors}
@@ -47,6 +50,7 @@ export default class CreateCourse extends Component {
                       <div className="grid-66">
                           <div className="course--header">
                               <h4 className="course--label">Course</h4>
+                                      {/* course title */}
                                       <input
                                       id="title"
                                       name="title"
@@ -55,10 +59,12 @@ export default class CreateCourse extends Component {
                                       onChange={this.change} 
                                       placeholder="Course title..."
                                       value={`${title}`}/>
-                                  
-                                      <p>By {`${ instructor }`}</p>
 
+                                      {/* course taught by */}
+                                      <p>By {`${ instructor }`}</p>
                           </div>
+
+                          {/* course description */}
                           <div className="course--description">
                                   <textarea
                                       id="description"
@@ -70,6 +76,8 @@ export default class CreateCourse extends Component {
                                   </textarea>
                           </div>
                       </div>
+
+                      {/* course estimated time and materials needed */}
                       <div className="grid-25 grid-right">
                           <div className="course--stats">
                               <ul className="course--stats--list">
@@ -108,7 +116,10 @@ export default class CreateCourse extends Component {
     )
   }
 
+  //dynamically update state using onChange from the JSX above
   change = (event) => {
+
+    //dynamically change the input while updating state
     const name = event.target.name;
     const value = event.target.value;
 
@@ -121,7 +132,6 @@ export default class CreateCourse extends Component {
 
   submit = () => {
 
-    // destructrued context variable allows access to methods from Data.js
     const { context } = this.props;
 
     const {
@@ -132,9 +142,10 @@ export default class CreateCourse extends Component {
       materialsNeeded,
     } = this.state;
 
+    // store authenticated user to POST method in Data.js
     const  authUser  = context.authenticatedUser;
 
-    //create a new course object
+    //create a new course object passing all the neccessary variables for the POST method in Data.js
     const course = {
       userId,
       title,
@@ -149,7 +160,6 @@ export default class CreateCourse extends Component {
         // if the promise is an array of errors, set the errors state of this class to the array
           .then( errors => {
               if(errors.length){
-                console.log(errors);
                   this.setState( { errors } );
               } else {
                   context.actions.signIn( authUser.emailAddress, authUser.password )

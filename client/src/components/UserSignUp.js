@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Form from './Form';
 
 export default class UserSignUp extends Component {
@@ -9,6 +9,7 @@ export default class UserSignUp extends Component {
     lastName: '',
     emailAddress: '',
     password: '',
+    confirmPassword: '',
     errors: [],
   }
 
@@ -21,6 +22,10 @@ export default class UserSignUp extends Component {
       confirmPassword,
       errors,
     } = this.state;
+
+    console.log(password);
+    console.log(confirmPassword);
+        console.log(errors);
 
     return (
     // Modeled from React Authentication Courses and Sample Markup: sign-up.html
@@ -83,7 +88,7 @@ export default class UserSignUp extends Component {
               </React.Fragment>
             )} />
           <p>
-            Already have an account? <Link to="/signin">Click here</Link> to sign in!
+            Already have an account? <NavLink to="/signin">Click here</NavLink> to sign in!
           </p>
         </div>
       </div>
@@ -108,30 +113,34 @@ export default class UserSignUp extends Component {
       const { context } = this.props;
 
       const {
-        firstName,
-        lastName,
-        emailAddress,
-        password,
-        confirmPassword,
-        errors
+          firstName,
+          lastName,
+          emailAddress,
+          password,
+          confirmPassword,
       } = this.state;
 
       //create a new user object
       const user = {
-        firstName,
-        lastName,
-        emailAddress,
-        password,
-        confirmPassword,
-        errors
+          firstName,
+          lastName,
+          emailAddress,
+          password,
+          confirmPassword,
       };
 
-      // access the createUser function via context, this is an async function that returns a Promise
+      // create error message for when password and confirm password do not match
+      const passwordError = { message: "Passwords must match" };
+
       
+      // access the createUser function via context, this is an async function that returns a Promise
+        if(password === confirmPassword){
+
           context.data.createUser(user)
           // if the promise is an array of errors, set the errors state of this class to the array
             .then( errors => {
                 if(errors.length){
+                  console.log(errors);
                     this.setState( { errors } );
                 } else {
                     context.actions.signIn(emailAddress, password)
@@ -145,6 +154,11 @@ export default class UserSignUp extends Component {
                 this.props.history.push('/error'); // push to history stack
 
             });
+            
+        } else {
+            this.setState(  { errors: [ passwordError ] } );
+        }
+
 
   }
 

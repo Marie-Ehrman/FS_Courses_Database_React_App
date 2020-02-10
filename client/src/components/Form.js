@@ -20,7 +20,7 @@ export default (props) => {
     event.preventDefault();
     cancel();
   }
-
+console.log(errors);
   return (
     <div>
       <ErrorsDisplay errors={errors} />
@@ -40,8 +40,8 @@ export default (props) => {
 // handles validation errors to be displayed on screen
 function ErrorsDisplay({ errors }) {
   let errorsDisplay = null;
-console.log(errors);
   if (errors.length) {
+    console.log(errors);
     errorsDisplay = (
       //render error messages 
       <div>
@@ -54,6 +54,5 @@ console.log(errors);
       </div>
     );
   }
-  console.log(errorsDisplay);
   return errorsDisplay;
 }

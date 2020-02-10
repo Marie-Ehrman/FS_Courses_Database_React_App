@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom';
 
 import ReactMarkdown from 'react-markdown';
 
-
+// Modeled from React Authentication Courses and Sample Markup: course-detail.html
 export default class CourseDetail extends Component {
 
 
@@ -32,6 +32,7 @@ export default class CourseDetail extends Component {
     const { context } = this.props;
     const { course } = this.state;
 
+    // variables to conditionally render "Update" and "Delete" buttons
     const instructor = this.state.course.User;
     const authUser = context.authenticatedUser;
     
@@ -41,11 +42,12 @@ export default class CourseDetail extends Component {
     const materials = `${course.materialsNeeded}`;
 
     return (
+
       <div className="bounds">
         <div className="grid-100">
           <h1>Courses</h1>
           <div>
-            {/* dynamically render buttons */}
+            {/* conditionally render "Update" and "Delete" buttons */}
             <div className="actions--bar">
               <div className="bounds">
                 { authUser === null || authUser.id !== instructor.id
@@ -56,8 +58,8 @@ export default class CourseDetail extends Component {
                   :
                   <div className="grid-100">
                     <span>
-                      <NavLink className="button" href={`/courses/${course.id}/update`}>Update Course</NavLink>
-                      <NavLink className="button" onClick={this.delete} href="/">Delete Course</NavLink>
+                      <NavLink to={`/courses/${course.id}/update`} className="button">Update Course</NavLink>
+                      <NavLink to="/" className="button" onClick={this.delete}>Delete Course</NavLink>
                     </span>
                     <NavLink to="/"className="button button-secondary">Return to List</NavLink>
                   </div>
@@ -110,7 +112,6 @@ export default class CourseDetail extends Component {
 
         const { context } = this.props;
         const {
-          course,
           id,
         } = this.state;
 
@@ -124,7 +125,6 @@ export default class CourseDetail extends Component {
           if(errors.length){
               this.setState( { errors } );
           } else {
-              console.log(`${course.title} is successfully deleted.`);
               this.props.history.push('/'); // push index route to history
 
             }

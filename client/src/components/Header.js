@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 export default class Header extends React.PureComponent {
 
@@ -18,13 +18,13 @@ export default class Header extends React.PureComponent {
                     authUser ? // if user is authenticated give header a welcome span and link to sign out
                     <React.Fragment>
                         <span>Welcome, {authUser.firstName}!</span>
-                        <Link to="/signout">Sign Out</Link>
+                        <NavLink to="/signout">Sign Out</NavLink>
                     </React.Fragment>
-                    : // else render the header with the sign up and sign out links
+                    : // else render the header with the sign up and sign out Navlinks
                 
                     <React.Fragment>
-                        <Link className="signup" to="/signup">Sign Up</Link>
-                        <Link className="signin" to="/signin">Sign In</Link>
+                        <NavLink className="signup" to="/signup">Sign Up</NavLink>
+                        <NavLink className="signin" to="/signin">Sign In</NavLink>
                     </React.Fragment>
                 }
                 </nav>
