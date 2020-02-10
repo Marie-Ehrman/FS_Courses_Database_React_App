@@ -3,11 +3,8 @@ import { NavLink } from 'react-router-dom';
 
 
 // Stateless header component to render header with "Sign In" and "Sign Out" links
-export default class Header extends React.PureComponent {
+const Header = ({ context }) => {
 
-    render() {
-
-        const { context } = this.props;
         const authUser = context.authenticatedUser;
 
         return(
@@ -34,6 +31,6 @@ export default class Header extends React.PureComponent {
               </div>
             </div>
         )
-    }
-
 }
+
+export default Header;
