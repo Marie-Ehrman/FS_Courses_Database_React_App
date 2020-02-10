@@ -128,8 +128,9 @@ export default class CourseDetail extends Component {
           if(errors.length){
               this.setState( { errors } );
           } else {
-              this.props.history.push('/'); // push index route to history
-
+             // change the location of the Window object to the index route
+             // to allow the courses to rerender when a course is deleted
+              window.location.href = '/';
             }
         })
       // handle rejected promises
