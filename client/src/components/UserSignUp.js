@@ -36,7 +36,7 @@ export default class UserSignUp extends Component {
             // elements prop function creates input fields to be used in the form
             elements={() => (
               <React.Fragment>
-                <input 
+                <input autoFocus
                   id="firstName" 
                   name="firstName" 
                   type="text"

@@ -30,7 +30,7 @@ export default class UserSignIn extends Component {
             submitButtonText="Sign In"
             elements={() => (
               <React.Fragment>
-                <input 
+                <input autoFocus
                   id="emailAddress" 
                   name="emailAddress" 
                   type="text"
