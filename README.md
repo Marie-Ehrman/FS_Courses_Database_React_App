@@ -17,14 +17,14 @@
  ### Frontend
 - Open Project File in Text Editor
 - Open up Text Editor's Terminal
-- Navigate to Project file's `client` folder
+- Navigate to Project file's `project-dir/client` folder
 - Install from terminal: `> npm install`
 - Launch from terminal: `> npm start`
 - React will open a browser page for you and navigate to `localhost:3000`
 
 ### Backend
-- Open up Computer's Terminal
-- Navigate to the Project file's `api` folder
+- Open up second Terminal
+- Navigate to the Project file's `project-dir/api` folder
 - Install from terminal: `> npm install`
 - Launch from terminal: `> npm start`
 - Server will be up and running on `localhost:5000`
@@ -62,4 +62,4 @@ Project files initialized with Express Generator CLI and Sequelize CLI
 
 
 ## Sources
- I was able to achieve most of this project by following along with the Treehouse "React Authentication Courses".
+ I was able to achieve most of this project by following along with the Treehouse "React Authentication Courses" and combining it with Techdegree-Project-9 from this repo.
